@@ -351,7 +351,7 @@ static int parseoptions (int argc, char *argv[])
 	  {0, 0, 0, 0}
 	};
 
-      c = getopt_long_only (argc, argv, "ab:B:cC:edD:EFgGI:hHl:L::m::M:o:O::pP"
+      c = getopt_long_only (argc, argv, "ab:B:cC:edD:EFgGI:hHl:L::m::M:N:o:O::pP"
 			    "qRsStTU:vVw", long_options, &option_index);
 
       if (c == EOF) break;
