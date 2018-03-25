@@ -203,15 +203,15 @@ void genmap (void)
 {
   int i;
   map_t *m = firstmappos;
-  fprintf (ccode, "__map __map%s[%d]={"
+  fprintf (ccode, "__map __map%s[%d]={{"
 	   ,separat_comp ? timestamp : "main", antmap);
   for (i = 1; i < antmap; i++)
     {
-      fprintf (ccode, "\"%s\",%ldL,%ldL,\n", m->filename, 
+      fprintf (ccode, "{\"%s\",%ldL,%ldL},\n", m->filename, 
 	       m->line, m->fromline);
       m = m->neste;
     }
-  fprintf (ccode, "\"\",0L,%ldL};\n", MAX_INT);
+  fprintf (ccode, "\"\",0L,%ldL}};\n", MAX_INT);
 }
 
 
