@@ -1112,13 +1112,18 @@ void genvalue (exp_t *re)
       break;
     case MNAMEREADACESS:
     case MNAMEWRITEACESS:
+    {
+      char getParent = 0;
       fprintf (ccode, "if(");
       if (re->rd->kind == KPROC)
 	fprintf (ccode, "__rgetproc(");
       else if (re->rd->kind == KARRAY)
 	fprintf (ccode, "__rgeta(");
       else if (re->token == MNAMEWRITEACESS)
+      {
 	fprintf (ccode, "__rgetsa(");
+        getParent = 1;
+      }
       else
 	switch (re->type)
 	  {
@@ -1146,13 +1151,14 @@ void genvalue (exp_t *re)
       gensl (re, TRUE, ON);
       {
 	int i;
-	fprintf (ccode, "%s,%ldL,%d,", re->rd->ident, 
+	fprintf (ccode, "%s%s,%ldL,%d,", re->rd->ident, getParent ? ".__simplenamepar_value" : "",
 		 re->value.n_of_stack_elements, i = newlabel ());
 	genmodulemark(NULL);
 	fprintf (ccode, "))");
 	exitcondlabel (i);
       }
       break;
+    }
     case MNAMEREADTEXT:
       fprintf (ccode, "switch (");
       gensl (re, TRUE, ON);
@@ -1602,10 +1608,8 @@ void gen_textconst (exp_t *re)
       else
 	{
 	  anttext++;
-	  fprintf (ccode, "struct __tt%d {__txt tvar;__th h;"
-		   "char string[%d];}\n__tk%d%s={(__textref)"
-		   "&__tk%d%s.h.pp,%d,1,1,(__pty)__TEXT,"
-		   "(__dhp)&__tk%d%s.h.pp,__CONSTANT,%d,\"%s\"};\n",
+	  fprintf (ccode, "struct __tt%d {__txt tvar;__th h;char string[%d];}\n"
+	       "__tk%d%s={{(__textref)&__tk%d%s.h.pp,%d,1,1},{(__pty)__TEXT,(__dhp)&__tk%d%s.h.pp,__CONSTANT,%d},\"%s\"};\n",
 		   anttext, antchar + 1,
 		   anttext, timestamp, anttext, timestamp,
 		   antchar, anttext, timestamp, antchar, t);

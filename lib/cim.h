@@ -346,7 +346,7 @@ typedef struct
   }
 __thunk, *__thunkp;
 
-typedef struct
+typedef struct __s_simplenamepar
   {
     __dhp sl;
     __progadr adr;
@@ -368,11 +368,11 @@ __charboolnamepar;
 
 typedef struct
   {
-    __dhp sl;
-    __progadr adr;
-    __dhp bp;
-    __ofsorvalue v;
-    char namekind;
+    union
+      {
+        struct __s_simplenamepar;
+        __simplenamepar __simplenamepar_value;
+      };
     char conv;
   }
 __aritnamepar;
