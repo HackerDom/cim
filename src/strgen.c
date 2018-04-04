@@ -539,7 +539,7 @@ static blockstructure (block_t *rb)
 		    rb->quant.plev + 1 : DEF_PLEV_TAB_SIZE));
 	  skrivprefikspp (&rb->quant);
 
-	  fprintf (ccode, "};\n__ptyp __p%d%s={'%c',%ld,%d,sizeof(__bs%d),%d,",
+	  fprintf (ccode, "};\n__ptyp __p%d%s={'%c',%ld,%d,sizeof(__bs%d),{%d,",
 		   rb->blno, timestamp,
 		   rb->quant.kind,
 		   rb->quant.plev,
@@ -549,9 +549,9 @@ static blockstructure (block_t *rb)
 	  if (separat_comp && (rb->quant.kind == KCLASS 
 			       || rb->quant.kind == KPROC ||
 			       rb->quant.kind == KPRBLK))
-	    fprintf (ccode, "__m_%s", timestamp);
+	    fprintf (ccode, "__m_%s}", timestamp);
 	  else
-	    fprintf (ccode, "0");
+	    fprintf (ccode, "0}");
 
 	  fprintf (ccode, ",%d,%d,%d,%d",
 		   rb->fornest, 
@@ -711,7 +711,7 @@ static void do_for_each_stat_pointer (block_t *block)
     case KBLOKK:
     case KPRBLK:
       if (block->stat)
-	fprintf (ccode, "if(((__dhp)&__blokk%d%s)->gl!=__NULL|force)"
+	fprintf (ccode, "if(((__dhp)&__blokk%d%s)->gl!=__NULL||force)"
 		 "__do_for_each_pointer((__dhp)&__blokk%d%s,doit,doit_notest);\n"
 		 ,block->blno, timestamp, block->blno, 
 		 block->timestamp?block->timestamp:timestamp);
@@ -817,7 +817,7 @@ void stat_pointers (void)
       fprintf (ccode, "\nvoid __init(void){__init_FILE();__init_SIMENVIR();}\n");
       fprintf 
 	(ccode, 
-	 "__do_for_each_stat_pointer(void(*doit)(),void(*doit_notest)(),int force){\n");
+	 "void __do_for_each_stat_pointer(void(*doit)(),void(*doit_notest)(),int force){\n");
 
       do_for_each_stat_pointer (sblock);
 
@@ -825,7 +825,7 @@ void stat_pointers (void)
       update_gl_obj (sblock);
 
 
-      fprintf (ccode, "}\n__update_gl_to_null(void){\n");
+      fprintf (ccode, "}\nvoid __update_gl_to_null(void){\n");
       update_gl_null (sblock);
 
       fprintf (ccode, "}\n");

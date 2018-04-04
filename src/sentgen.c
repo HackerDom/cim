@@ -77,6 +77,7 @@ static void module_gen (sent_t *sent)
   if (!separat_comp)
     {
       fprintf (ccode, "int __start_data_segment=1;\n");
+	  fprintf (ccode, "#include <stdlib.h>\n");
     }
   fprintf (ccode, "#include \"%s/cim.h\"\n", 
 	   includedir);
