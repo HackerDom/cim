@@ -886,3 +886,7 @@ char **__rcopytextarrtoc (__arrp p, char byvalue);
 char *__rcopyarrtoc (__arrp p);
 
 char *xmalloc (unsigned int size);
+
+void __rbe (void);
+void __rcpp (__pty ppx);
+void __init_FILE (void);
