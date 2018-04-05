@@ -16,6 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA. */
 
+#include <limits.h>
 #include "config.h"
 
 /* lex.c */
@@ -30,9 +31,9 @@
 
 /* Define MAX_INT */
 #if SIZEOF_LONG == 8
-#define MAX_INT (~(1L<<63))
+#define MAX_INT (LONG_MAX)
 #else
-#define MAX_INT (~(1L<<31))
+#define MAX_INT (INT_MAX)
 #endif
 
 /* Define TYPE_32_INT */
