@@ -21,9 +21,9 @@
 #include "cim.h"
 
 #if SIZEOF_LONG == 8
-#define PSURANNUM 7450580596923828125L	/* Se nedenfor (p=13) */
+#define PSURANNUM 7450580596923828125UL	/* Se nedenfor (p=13) */
 #else
-#define PSURANNUM 1220703125L	/* I f|lge standarden lik 5**(2*p+1) (p=6) */
+#define PSURANNUM 1220703125UL	/* I f|lge standarden lik 5**(2*p+1) (p=6) */
 #endif
 #define CALCU (((unsigned long)(*U= (*U*PSURANNUM)|1))>>1)
 #define MAXU (MAX_INT)
