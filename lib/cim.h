@@ -358,11 +358,11 @@ __simplenamepar;
 
 typedef struct
   {
-    __dhp sl;
-    __progadr adr;
-    __dhp bp;
-    __ofsorvalue v;
-    char namekind;
+    union
+      {
+        struct __s_simplenamepar;
+        __simplenamepar __simplenamepar_value;
+      };
   }
 __charboolnamepar;
 
@@ -379,11 +379,11 @@ __aritnamepar;
 
 typedef struct
   {
-    __dhp sl;
-    __progadr adr;
-    __dhp bp;
-    __ofsorvalue v;
-    char namekind;
+    union
+      {
+        struct __s_simplenamepar;
+        __simplenamepar __simplenamepar_value;
+      };
     __pty q;
     char conv;
   }
@@ -391,11 +391,11 @@ __refnamepar;
 
 typedef struct
   {
-    __dhp sl;
-    __progadr adr;
-    __dhp bp;
-    __ofsorvalue v;
-    char namekind;
+    union
+      {
+        struct __s_simplenamepar;
+        __simplenamepar __simplenamepar_value;
+      };
     __txtvp tp;
   }
 __textnamepar;
@@ -636,7 +636,12 @@ __dhp __ralloc (long size);
 
 
 void __rccb (int ret, void (*mret) ());
-void *__rerror (char *s);
+#pragma GCC diagnostic ignored "-Wattributes"
+void *__rerror (char *s) 
+#ifndef lint
+  __attribute__((analyzer_noreturn))
+#endif
+;
 void __rct (long as);
 void __rslutt (void);
 void __rstart (int argc, char *argv[]);
@@ -890,3 +895,5 @@ char *xmalloc (unsigned int size);
 void __rbe (void);
 void __rcpp (__pty ppx);
 void __init_FILE (void);
+void __rcprbb (int ret, void (*mret) ());
+char __rgetta (__textnamepar *p, long as, int ret, void (*mret) ());
