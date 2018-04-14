@@ -28,6 +28,10 @@
 #include <strings.h>
 #endif
 
+#if STDC_HEADERS
+#include <stdlib.h>
+#endif
+
 /******************************************************************************
                                                        DO_FOR_STACK_POINTERS */
 
@@ -331,7 +335,7 @@ static char *new_fri,
 
 static void do_add_to_pointer (__dhp *qp)
 {
-  if (*qp >= __min & *qp < __fri)
+  if (*qp >= __min && *qp < __fri)
     *qp = (__dhp) ((char *) (*qp) + disp);
 }
 
