@@ -51,7 +51,7 @@
 
 char setdanger_const (exp_t *re)
 {
-  char sub_danger;
+  char sub_danger = 0;
   if (LEFT != NULL)
     sub_danger = setdanger_const (LEFT);
   if (RIGHT != NULL)
@@ -187,8 +187,8 @@ int sstrlen (char s[])
 
 char computeconst (exp_t *re)
 {
-  char lconst,
-    rconst;
+  char lconst = FALSE,
+    rconst = FALSE;
   switch (TOKEN)
     {
     case MIFE:
