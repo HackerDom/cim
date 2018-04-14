@@ -21,3 +21,6 @@ Makefile
 Makefile.in
 .deps
 .libs
+
+*.swp
+*.deb
