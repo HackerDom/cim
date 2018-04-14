@@ -187,7 +187,7 @@ AC_MSG_RESULT($cim_cv_lines_per_page)
 AC_DEFINE_UNQUOTED(LINES_PER_PAGE,$cim_cv_lines_per_page, "Define lines per page")
 
 AC_MSG_CHECKING(assuming the size of the heap in kB)
-AC_CACHE_VAL(cim_cv_dynmemsizekb,[cim_cv_dynmemsizekb=512])
+AC_CACHE_VAL(cim_cv_dynmemsizekb,[cim_cv_dynmemsizekb=102400])
 AC_MSG_RESULT($cim_cv_dynmemsizekb)
 AC_DEFINE_UNQUOTED(DYNMEMSIZEKB,$cim_cv_dynmemsizekb, "Define the size of the heap")
 
